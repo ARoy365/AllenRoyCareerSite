@@ -1,0 +1,379 @@
+/* =========================
+   Allen Roy - styles.css
+   Updated and consolidated
+   ========================= */
+
+/* ---------- Base / Layout ---------- */
+:root{
+  --accent-blue: #0dcaf0;     /* header/footer blue */
+  --soft-blue:  #eef7fb;      /* faint section tint */
+  --soft-gray:  #f5f5f5;
+  --light-gray: #f8f9fa;
+  --muted:      #6c757d;
+  --text:       #222;
+  --card-border: rgba(0,0,0,0.08);
+}
+
+html,body{
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text);
+  background: #ffffff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------- Header override (keep your existing one) ---------- */
+.custom-bg {
+  background-color: rgb(13,202,240) !important; /* same as --accent-blue */
+}
+
+/* ---------- Profile / Images ---------- */
+.src-img{
+  width: 100%;
+  height: auto;
+  max-width: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* small icons used in cards/projects */
+.custom-h{
+  height: 50px;
+  object-fit: contain;
+  display: block;
+}
+
+/* endorsement avatar (small round) */
+.src{
+  margin-left: 5%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* linkedin overlay inside endorsement span */
+.carousel-item .card span {
+  position: relative;            /* makes .src_linkicon position absolute to this */
+  display: inline-block;
+  padding-right: 6px;
+}
+
+.src_linkicon{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -6px;
+  top: 24px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  object-fit: contain;
+}
+
+/* social icons in footer */
+.srcicons{
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---------- Cards (skills/projects) ---------- */
+.cardps {
+  padding: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 240px;
+}
+
+/* Hover effect */
+.cardps:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* keep bootstrap .card spacing reasonable */
+.card {
+  padding-top: 12px;
+  margin: 6px;
+  background: transparent; /* cardps already provides card background */
+  border: none;
+}
+
+/* ensure card image inside cardps behaves */
+.cardps .card-img-top {
+  margin-bottom: 12px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+}
+
+/* minor utility */
+.padding-card{
+  padding: 10px;
+}
+
+/* make card text slightly softer */
+.cardps h6, .cardps h5 {
+  margin: 0 0 6px 0;
+  color: #111;
+}
+
+/* ---------- Paragraph readability ---------- */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* ---------- Scrollable rows (skills/projects) ---------- */
+.scroll-container,
+#skills-row,
+#projects-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: flex-start;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* child card snap */
+.scroll-container > .cardps,
+#skills-row > .cardps,
+#projects-row > .cardps {
+  scroll-snap-align: start;
+  flex: 0 0 auto; /* prevents shrinking, keeps min-width used in HTML */
+}
+
+/* hide native scrollbar but keep scroll available */
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 8px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* sticky scroll arrow (right) */
+#scroll-right,
+#scroll-right-projects {
+  position: sticky !important;
+  top: 45%;
+  right: 0;
+  z-index: 6;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  opacity: 0.85;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  background: var(--accent-blue);
+  color: #000;
+}
+#scroll-right:focus,
+#scroll-right-projects:focus {
+  outline: 3px solid rgba(13,202,240,0.18);
+}
+
+/* hide on very large screens if desired - kept from your earlier code */
+@media (min-width: 1440px) {
+  #scroll-right,
+  #scroll-right-projects {
+    display: none !important;
+  }
+}
+
+/* ---------- Carousel (endorsements) ---------- */
+.carousel-item .card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border-top: 4px solid #d6ecf6; /* soft blue accent */
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* carousel text */
+.carousel-item .card-text {
+  color: #444;
+  margin: 8px 0 0 0;
+}
+
+/* make carousel inner center content */
+#endorsementsCarousel .carousel-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+/* ---------- Contact form ---------- */
+form .form-control {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  box-shadow: none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+form .form-control:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 8px rgba(13,202,240,0.14);
+  outline: none;
+}
+
+.form-label {
+  margin-bottom: 0;
+  font-size: 0.92rem;
+  color: #333;
+}
+
+small.text-danger {
+  display: block;
+  min-height: 1.1rem;
+  font-size: 0.84rem;
+}
+
+/* form submit acknowledgment */
+#submitAck {
+  margin-left: 12px;
+  align-self: center;
+  color: #0b7285;
+  font-weight: 600;
+}
+
+/* dropdown state control (keeps width consistent) */
+.dropdown.dropup .dropdown-toggle {
+  cursor: pointer;
+}
+
+/* ---------- Section backgrounds (skip header/footer) ---------- */
+/* The page contains five main <section> blocks (About / Skills / Projects / Endorsements / Contact) */
+section.p-4,
+section.p-4 + section,
+section:nth-of-type(1)  { /* About Me (first section) */
+  background-color: var(--light-gray);
+}
+
+section:nth-of-type(2) { /* Skills and Interests */
+  background-color: var(--soft-blue);
+}
+
+section:nth-of-type(3) { /* Projects */
+  background-color: var(--soft-gray);
+}
+
+section:nth-of-type(4) { /* Endorsements carousel */
+  background-color: #fefefe;
+}
+
+section.pt-3.p-3,
+section:nth-of-type(5) { /* Contact section (last main section) */
+  background-color: var(--soft-blue);
+}
+
+/* section padding consistency */
+section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* headings */
+section h1, section h3 {
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Accessibility / small tweaks ---------- */
+a.nav-link.text-white {
+  color: #fff !important;
+}
+
+/* make nav toggler icon visible on bright header */
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler-icon {
+  filter: invert(1); /* flips the svg color so it shows on blue bg */
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media(max-width:426px){
+  .cardps{
+    margin: 10px;
+    min-height: 220px;
+  }
+  .src {
+    width: 36px;
+    height: 36px;
+  }
+  .src_linkicon {
+    width: 18px;
+    height: 18px;
+    top: 22px;
+    right: -4px;
+  }
+}
+
+@media (min-width: 768px){
+  .cardps{
+    min-height: 300px;
+    padding-top: 16px;
+    margin: 6px;
+  }
+}
+
+/* ---------- Misc / legacy from your CSS ---------- */
+.scroll-right{
+  width: 40px;
+  height: 40px;
+}
+
+/* subtle card text color */
+.cardps p, .card p {
+  color: #444;
+}
+
+/* ensure dropdown menu in state selector keeps max-height */
+.dropdown-menu.w-100 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* ensure clickable dropdown items stay readable */
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: rgba(13,202,240,0.07);
+  color: #111;
+}
+
+/* final visual polish - small transitions sitewide */
+a, button, .nav-link {
+  transition: all .12s ease;
+}
